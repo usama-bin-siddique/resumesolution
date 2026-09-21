@@ -1,12 +1,26 @@
 # GlobalCV
 
-Astro public pages, a React resume editor, and a small Cloudflare-compatible Worker for private D1 drafts. Guest creation, document import and PDF export do not require authentication. Hosted accounts use Sites' dispatch-owned Sign in with ChatGPT.
+Astro public pages, a React resume editor, and a small Cloudflare-compatible Worker for private D1 drafts. Guest creation, document import and PDF export do not require authentication. Accounts use GlobalCV email/password login and opaque HttpOnly session cookies.
 
-## Development
+## Run locally (Windows)
+Install Node.js 24 or newer, then open PowerShell:
 
-`npm install`, `npm run dev`, `npm run db:generate`, `npm test`, `npm run build`.
+```powershell
+cd "C:\Users\zigron\Documents\Codex\2026-09-21\i-x20\outputs\globalcv"
+npm install
+npm run dev
+```
 
-The local Astro preview supports guest workflows. Its API middleware deliberately reports an anonymous visitor; it does not simulate a real account. Hosted identity headers are only trusted behind the Sites dispatcher. Never expose the draft Worker directly with untrusted identity headers.
+Open http://127.0.0.1:4321/ (use this exact host). Local accounts and drafts are stored in .sites-runtime/globalcv.sqlite; migrations apply automatically. This is a separate database from the published site. Astro runs the dev server in the background; stop it with `npx astro dev stop`.
+
+Run `npm test` for API tests, `npm run build` for production output, and `npm run db:generate` only when changing the database schema.
+
+## Accounts
+Use /login/, /signup/ and /dashboard/. Registration issues a one-time recovery code: save it outside the browser. /recover/ resets a password using that code and rotates the code. No SMTP, email verification or email-based reset is configured. Account security in the dashboard changes the password and invalidates other sessions.
+
+Passwords use salted scrypt (N=16384, r=8, p=5). Only hashes of session tokens and recovery codes are stored. HTTPS sessions use a Secure, HttpOnly, SameSite=Strict cookie. Write requests require a matching Origin. Auth attempts are rate-limited in the database.
+
+Earlier provider-linked drafts are preserved in the database, but not automatically transferred to email/password accounts: an unverified matching email cannot prove ownership. A verified migration process would be required to transfer those records safely.
 
 Imports are client-side PDF.js / Mammoth text extraction, followed by conservative section mapping and mandatory review. Scanned PDFs are rejected; OCR is not implemented. DOCX import is supported; DOCX export is outside the first release. PDF export is client-side React PDF with selectable text and embedded Noto Sans fonts. Templates use one shared resume schema. English-first, no Arabic/Urdu layout guarantee.
 
@@ -23,4 +37,4 @@ Temporary state uses sessionStorage. Only an explicit Save draft creates an acco
 
 ## Validation
 
-Worker tests cover guest protection, draft ownership, optimistic concurrency, deletion, cross-origin writes and schema validation. Public pages are static HTML; only editor/draft routes hydrate React. PDF and import libraries are dynamically imported when requested.
+Worker tests cover guest protection, draft ownership, optimistic concurrency, deletion, cross-origin writes and schema validation. Public pages are static HTML; only editor/account routes hydrate React. PDF and import libraries are dynamically imported when requested.

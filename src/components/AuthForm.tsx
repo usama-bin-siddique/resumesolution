@@ -1,0 +1,18 @@
+import {useState} from 'react';
+export type Account={id:string;name:string;email:string};
+export default function AuthForm({initialMode='login',onSuccess}:{initialMode?:'login'|'register'|'recover';onSuccess?:(user:Account)=>void}){
+ const [mode,setMode]=useState(initialMode),[error,setError]=useState(''),[busy,setBusy]=useState(false),[recovery,setRecovery]=useState(''),[account,setAccount]=useState<Account|null>(null);
+ function finish(){if(account&&onSuccess)onSuccess(account);else location.assign(account?'/dashboard/':'/login/');}
+ async function submit(e:React.FormEvent<HTMLFormElement>){e.preventDefault();setError('');setBusy(true);const data=Object.fromEntries(new FormData(e.currentTarget));try{const res=await fetch(`/api/auth/${mode}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const body=await res.json();if(!res.ok)throw new Error(body.error||'Please try again.');if(body.user)window.dispatchEvent(new CustomEvent('globalcv-account',{detail:body.user}));if(body.recoveryCode){setRecovery(body.recoveryCode);setAccount(body.user||null);}else if(onSuccess)onSuccess(body.user);else location.assign('/dashboard/');}catch(e){setError((e as Error).message)}finally{setBusy(false)}}
+ if(recovery)return <div className="auth-form"><h3>{account?'Your account is ready':'Password reset'}</h3><p>Save your private recovery code. You’ll need it if you forget your password. It is shown only once; keep it somewhere safe, outside this browser.</p><code className="recovery-code">{recovery}</code><a className="button secondary full" download="GlobalCV-recovery-code.txt" href={`data:text/plain;charset=utf-8,${encodeURIComponent('GlobalCV recovery code\n'+recovery+'\nKeep this private. A new recovery code replaces the previous one.')}`}>Download recovery code</a><button className="button primary full" onClick={finish}>I’ve saved my code · {account?'Continue':'Log in'}</button></div>;
+ return <div className="auth-form"><div className="auth-tabs"><button className={mode==='login'?'selected':''} onClick={()=>{setMode('login');setError('')}} type="button">Log in</button><button className={mode==='register'?'selected':''} onClick={()=>{setMode('register');setError('')}} type="button">Create account</button></div>{mode==='recover'&&<><h3>Recover your account</h3><p>Enter the recovery code saved when you created your account. This website does not send password-reset emails.</p></>}<form onSubmit={submit}>
+ {mode==='register'&&<label className="field"><span>Your name</span><input name="name" autoComplete="name" required maxLength={100}/></label>}
+ <label className="field"><span>Email address</span><input name="email" type="email" autoComplete="email" required maxLength={254}/></label>
+ {mode==='recover'&&<label className="field"><span>Recovery code</span><input name="recoveryCode" autoComplete="off" required maxLength={100}/></label>}
+ <label className="field"><span>{mode==='recover'?'New password':'Password'}</span><input name="password" type="password" autoComplete={mode==='login'?'current-password':'new-password'} required minLength={mode==='login'?1:15} maxLength={128}/></label>
+ {mode!=='login'&&<p className="helper">Use 15–128 characters. A memorable passphrase works well.</p>}
+ {error&&<p className="error-banner" role="alert">{error}</p>}
+ <button className="button primary full" disabled={busy} type="submit">{busy?'Please wait…':mode==='login'?'Log in':mode==='register'?'Create free account':'Reset password'}</button></form>
+ {mode==='login'&&<button className="text-button full" onClick={()=>{setMode('recover');setError('')}}>Forgot password?</button>}
+ <p className="helper">An account is only needed to save drafts. Creating and downloading resumes stays free.</p></div>
+}
