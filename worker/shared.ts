@@ -5,7 +5,7 @@ export type Statement = {
   run: () => Promise<{meta: {changes: number}}>;
 };
 export type Database = {prepare: (sql: string) => Statement; batch: (statements: Statement[]) => Promise<any[]>};
-export type Env = {DB?: Database; ASSETS?: {fetch: (request: Request) => Promise<Response>}};
+export type Env = {GROQ_API_KEY?: string; DB?: Database; ASSETS?: {fetch: (request: Request) => Promise<Response>}};
 export function json(body: unknown, status = 200, extra: Record<string, string> = {}) {
   return new Response(JSON.stringify(body), {status, headers: {
     'Content-Type': 'application/json', 'Cache-Control': 'private, no-store',

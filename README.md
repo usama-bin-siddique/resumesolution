@@ -38,3 +38,14 @@ Temporary state uses sessionStorage. Only an explicit Save draft creates an acco
 ## Validation
 
 Worker tests cover guest protection, draft ownership, optimistic concurrency, deletion, cross-origin writes and schema validation. Public pages are static HTML; only editor/account routes hydrate React. PDF and import libraries are dynamically imported when requested.
+
+## AI tailoring
+/tailor/ accepts PDF/DOCX/TXT or pasted CV text, a current builder resume, or an authenticated saved draft. Users review imported fields, consent to Groq processing and approve individual suggestions before generating a PDF or saving a new draft. The original draft is never updated.
+
+Set GROQ_API_KEY privately in .env.local for local use and as a secret runtime environment variable in Sites for production. Keep the Groq account on its Free plan; there is no paid-provider fallback or automatic retry. The provider's organization-wide free limits can be reached before individual users exhaust their allowance. Model: openai/gpt-oss-20b.
+
+The server reserves at most five AI attempts per account per UTC day, or per network for guests. Concurrent requests cannot exceed the limit. Guest network tracking cannot uniquely identify a person and shared-network visitors share their allowance; signing in or changing networks can create a separate allowance. Failed provider attempts count; invalid input and unconfigured-service requests do not.
+
+Contact fields are excluded from the provider payload; professional sections can still contain personal information. CVs, job descriptions and suggestions are not stored server-side unless the user explicitly saves an approved draft. Usage records contain hashed identifiers and are cleaned up after three days on subsequent requests. AI suggestions are bounded, evidence-checked and restricted to selected text fields; human review is required because these checks cannot prove semantic accuracy.
+
+Validation covers concurrent quota reservation, account and guest scope, consent, provider errors, malformed replies, overlong evidence lists, selected-only changes, and preserving original data. Live provider diagnostics use fictional data and an in-memory quota database, separate from visitor usage.

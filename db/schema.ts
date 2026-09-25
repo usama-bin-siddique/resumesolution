@@ -1,5 +1,7 @@
-import {sqliteTable,text,integer,index,uniqueIndex} from 'drizzle-orm/sqlite-core';
+import {sqliteTable,text,integer,index,uniqueIndex,primaryKey} from 'drizzle-orm/sqlite-core';
 export const drafts=sqliteTable('drafts',{id:text('id').primaryKey(),ownerId:text('owner_id').notNull(),title:text('title').notNull(),data:text('data').notNull(),revision:integer('revision').notNull().default(1),updatedAt:text('updated_at').notNull(),createdAt:text('created_at').notNull()},t=>[index('idx_drafts_owner_updated').on(t.ownerId,t.updatedAt)]);
 export const accounts=sqliteTable('accounts',{id:text('id').primaryKey(),email:text('email').notNull(),name:text('name').notNull(),passwordHash:text('password_hash').notNull(),recoveryHash:text('recovery_hash').notNull(),createdAt:text('created_at').notNull()},t=>[uniqueIndex('idx_accounts_email').on(t.email)]);
 export const authSessions=sqliteTable('auth_sessions',{tokenHash:text('token_hash').primaryKey(),userId:text('user_id').notNull().references(()=>accounts.id,{onDelete:'cascade'}),expiresAt:integer('expires_at').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_sessions_user').on(t.userId),index('idx_sessions_expiry').on(t.expiresAt)]);
 export const authAttempts=sqliteTable('auth_attempts',{bucket:text('bucket').primaryKey(),count:integer('count').notNull().default(0),expiresAt:integer('expires_at').notNull()},t=>[index('idx_attempts_expiry').on(t.expiresAt)]);
+
+export const tailorUsage=sqliteTable('tailor_usage',{subject:text('subject').notNull(),day:text('day').notNull(),used:integer('used').notNull().default(0)},t=>[primaryKey({columns:[t.subject,t.day]}),index('idx_tailor_usage_day').on(t.day)]);

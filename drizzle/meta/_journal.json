@@ -15,6 +15,13 @@
       "when": 1789993255579,
       "tag": "0001_low_fabian_cortez",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790317833721,
+      "tag": "0002_safe_ulik",
+      "breakpoints": true
     }
   ]
 }

@@ -1,12 +1,14 @@
 import {validateResume} from '../src/lib/resume.ts';
 import {json,db,InputError,type Env} from './shared.ts';
 import {authRoute,getAccount} from './auth.ts';
+import {tailorRoute} from './tailor.ts';
 export default {async fetch(request:Request,env:Env):Promise<Response>{
  const url=new URL(request.url),path=url.pathname;
  if(!path.startsWith('/api/')){if(env.ASSETS)return env.ASSETS.fetch(request);return new Response('Not found',{status:404});}
  if(request.method==='OPTIONS')return new Response(null,{status:405});
  if(!['GET','HEAD'].includes(request.method)){if(request.headers.get('origin')!==url.origin||request.headers.get('sec-fetch-site')==='cross-site')return json({error:'This request could not be verified.'},403);}
  try{
+  const tailored=await tailorRoute(request,env);if(tailored)return tailored;
   const auth=await authRoute(request,env);if(auth)return auth;
   const identity=await getAccount(request,env);
   if(!identity)return json({error:'Log in to save or open private drafts.'},401);
