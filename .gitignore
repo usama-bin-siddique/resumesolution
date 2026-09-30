@@ -2,8 +2,7 @@ node_modules/
 dist/
 .astro/
 .sites-runtime/
-.env
-.env.local
 .wrangler/
 .env.example
 README.md
+config.bat

@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev --host 127.0.0.1",
-    "build": "astro build && node scripts/build-worker.mjs",
+    "dev": "node init && astro dev --host 127.0.0.1",
+    "build": "node init && astro build && node scripts/build-worker.mjs",
     "db:generate": "drizzle-kit generate",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "test:api-build": "tsc -p tsconfig.api.json && node scripts/check-api-build.mjs"

@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import posts from '../../data/blogs.json';
+---
+<Layout title="Resume & CV Blog" description="Practical articles on writing your first resume, tailoring your CV, choosing a readable template and updating an existing document." active="blogs">
+<main id="main" class="content-page blog-index"><div class="page-heading"><span class="eyebrow">IDEAS FOR YOUR NEXT APPLICATION</span><h1>A little guidance.<br/>A clearer CV.</h1><p>Practical advice to help you tell your story, organize your experience and prepare your next application.</p></div><div class="blog-grid">{posts.map((post,i)=><article class="blog-card"><div class="blog-card-top"><span class="tag">{post.category}</span><span aria-hidden="true" class="blog-number">0{i+1}</span></div><h2><a href={`/blogs/${post.slug}/`}>{post.title}</a></h2><p>{post.description}</p><a class="blog-read" href={`/blogs/${post.slug}/`} aria-label={`Read: ${post.title}`}>Read article <span aria-hidden="true">→</span></a></article>)}</div><aside class="article-note"><h2>Put your next idea into practice.</h2><p>Create a new resume or bring your existing CV into the builder. No account is needed to create and download.</p><a class="button primary" href="/builder/">Open the resume builder →</a></aside></main>
+</Layout>

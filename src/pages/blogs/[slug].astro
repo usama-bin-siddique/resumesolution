@@ -1,0 +1,8 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import posts from '../../data/blogs.json';
+export function getStaticPaths(){return posts.map(post=>({params:{slug:post.slug},props:{post}}));}
+const {post}=Astro.props;
+const readingTime=Math.ceil(post.sections.flatMap(section=>section[1]).join(' ').split(/\s+/).length/200);
+---
+<Layout title={post.title} description={post.description} active="blogs"><main id="main" class="content-page article blog-article"><nav aria-label="Breadcrumb"><a href="/blogs/">← All blogs</a></nav><header class="blog-article-heading"><span class="eyebrow">{post.category}</span><h1>{post.title}</h1><p class="lead">{post.description}</p><p class="blog-meta">GlobalCV · {readingTime} min read</p></header><nav class="blog-contents" aria-label="In this article"><strong>In this article</strong><ol>{post.sections.map((section,i)=><li><a href={`#section-${i+1}`}>{section[0]}</a></li>)}</ol></nav>{post.sections.map((section,i)=><section aria-labelledby={`section-${i+1}`}><h2 id={`section-${i+1}`}>{section[0]}</h2>{section[1].map(paragraph=><p>{paragraph}</p>)}</section>)}<aside class="article-note"><h2>Ready to work on your CV?</h2><a class="button primary" href={post.href}>{post.cta} →</a></aside><aside class="blog-related" aria-label="Related articles"><h2>Keep reading</h2><ul>{posts.filter(other=>other.slug!==post.slug).map(other=><li><a href={`/blogs/${other.slug}/`}>{other.title}</a></li>)}</ul></aside></main></Layout>
