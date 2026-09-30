@@ -1,0 +1,175 @@
+[
+  {
+    "slug": "write-your-first-resume",
+    "title": "Your first resume: turn learning into evidence",
+    "category": "Getting started",
+    "description": "Build a useful first resume with education, projects and real examples, even when you have little work experience.",
+    "cta": "Start your resume",
+    "href": "/builder/",
+    "sections": [
+      [
+        "Start with the role you want",
+        [
+          "A first resume does not need to look like a senior professional’s career history. Its job is to show what you can already do and how you have demonstrated it. Read the vacancy and write down three or four tasks you could support with a real example.",
+          "For a junior web role, that evidence might be a class website, a volunteer redesign or a personal project. For an administrative role, it could be organizing a student event, maintaining records or answering customer questions. Select examples because they connect to the work, rather than because they fill space."
+        ]
+      ],
+      [
+        "Build a simple structure",
+        [
+          "Begin with your name, reliable contact details and a short introduction. Add education, relevant projects, work or volunteering, and skills. You can leave out sections that have no useful content. If education is your strongest evidence, place it early.",
+          "A useful introduction names your direction and gives one concrete strength. For example: “Computer science graduate with experience building small React applications and testing user forms. Seeking a junior frontend role.” Use this only as a structure; replace the details with your own."
+        ]
+      ],
+      [
+        "Describe the work, not just the activity",
+        [
+          "“Completed a group project” tells the reader very little. Explain what you personally contributed, how you did it and what the result was. A more specific example is: “Built form validation for a three-person course project and documented test cases for missing and invalid inputs.”",
+          "Numbers help only when you can explain where they came from. Do not invent a percentage improvement or describe the whole team’s work as your own. A clear account of a modest contribution is stronger than an impressive claim you cannot support."
+        ]
+      ],
+      [
+        "Choose skills you can demonstrate",
+        [
+          "List tools or methods you have actually used, and connect important skills to a project or experience entry. Avoid a long list copied from the vacancy. If you are still learning a tool, say so rather than presenting it as professional expertise."
+        ]
+      ],
+      [
+        "Check the final document",
+        [
+          "Read the downloaded PDF, not only the editor preview. Check spelling, contact details, dates and page breaks. Ask yourself whether every example helps the reader understand your suitability. Save a version named for the role so you can find the right file when applying."
+        ]
+      ]
+    ]
+  },
+  {
+    "slug": "tailor-resume-to-job-description",
+    "title": "How to tailor your CV without changing the facts",
+    "category": "Job applications",
+    "description": "Match your experience to a vacancy through clearer wording and better priorities, with a practical review process for AI suggestions.",
+    "cta": "Tailor my CV",
+    "href": "/tailor/",
+    "sections": [
+      [
+        "Read the vacancy for evidence",
+        [
+          "Before editing, separate the job description into responsibilities, required skills and preferred qualifications. Look for the work the employer expects you to do. A repeated phrase may deserve attention, but repetition alone does not make it a requirement.",
+          "Next to each relevant requirement, write a real example from your experience. Leave a gap if you have no evidence. This makes it easier to decide what to emphasize and prevents a rewrite from turning an aspiration into a claim."
+        ]
+      ],
+      [
+        "Change emphasis before adding words",
+        [
+          "Move your most relevant project or experience higher within its section. Rewrite the introduction to reflect the role, and shorten details that do not help this application. Tailoring often means making important information easier to find rather than making the CV longer.",
+          "For example, an original line might say: “Helped customers and updated spreadsheets.” If both activities are accurate and the vacancy emphasizes reporting, a focused version could be: “Maintained customer enquiry records in spreadsheets and helped resolve incoming questions.” This changes emphasis without inventing a result."
+        ]
+      ],
+      [
+        "Use the employer’s terminology carefully",
+        [
+          "Use a term from the vacancy when it accurately describes your work. If you used Microsoft Excel, naming it can be clearer than “office software.” Do not add a tool you have never used or repeat keywords in a hidden block. Keep job titles, dates, qualifications and responsibilities accurate."
+        ]
+      ],
+      [
+        "Review AI suggestions one by one",
+        [
+          "An AI rewrite is a draft for review. Compare each suggestion with the original and ask whether it changes the meaning, adds a new skill or implies an outcome you did not achieve. Reject unsupported claims, even if the wording sounds polished.",
+          "In GlobalCV, upload or paste your existing CV and add the job description on the Tailor page. Review the proposed changes before approving them. Keep a copy of your original so you can compare versions and reuse verified information."
+        ]
+      ],
+      [
+        "Finish with an application check",
+        [
+          "Read the completed CV against the vacancy one last time. Confirm that the strongest relevant evidence appears clearly, that the writing still sounds like you, and that the file follows the employer’s instructions. Tailoring cannot guarantee an interview; its purpose is to make your genuine fit easier to assess."
+        ]
+      ]
+    ]
+  },
+  {
+    "slug": "choose-readable-resume-template",
+    "title": "Choose a resume template that makes your work easy to read",
+    "category": "Templates & layout",
+    "description": "A practical checklist for readable headings, spacing, section order and checking the PDF you send to employers.",
+    "cta": "Explore templates",
+    "href": "/templates/",
+    "sections": [
+      [
+        "Start with the content",
+        [
+          "Choose a layout after you know what you need to include. A graduate with two projects and one qualification has different space needs from someone with a long employment history. Put your real content into a template before deciding whether its sample looks right for you.",
+          "A template is a presentation choice, not proof that your CV will pass a screening system. No design can guarantee an interview or make missing qualifications disappear. Focus on clear information and follow any format requested by the employer."
+        ]
+      ],
+      [
+        "Make the reading order obvious",
+        [
+          "Use recognizable headings such as Experience, Education, Projects and Skills. Keep each job title close to its employer and dates. A reader should be able to tell where one entry ends and the next begins without working through decorative elements.",
+          "For a straightforward layout, try a single column with consistent headings. If you choose a more decorative design, check that the text still reads in the intended order when selected and copied from the PDF. This is a useful check, though it does not certify compatibility with every application system."
+        ]
+      ],
+      [
+        "Use spacing before shrinking text",
+        [
+          "When a page feels crowded, first remove repetition and shorten less relevant descriptions. Keep enough space between entries for the page to be scanned comfortably. Reducing every line to a tiny font may fit more content while making the document harder to use.",
+          "Look at the PDF at normal reading size. Check whether headings are distinct, dates are legible and important information is easy to find. Use color sparingly and keep essential details readable without relying on color alone."
+        ]
+      ],
+      [
+        "Adapt to the application instructions",
+        [
+          "Check the requested file type, page size and any mandatory information in the vacancy or application portal. A country label is a starting point, not a universal rule for every employer in that country. If the portal asks for a different format, follow that instruction."
+        ]
+      ],
+      [
+        "Inspect the exported file",
+        [
+          "Download a sample with your real content. Look for a heading stranded at the bottom of a page, awkwardly split entries and blank space caused by long descriptions. Check that email and website text are correct. Keep the version that presents your information clearly, rather than the one with the most decoration."
+        ]
+      ]
+    ]
+  },
+  {
+    "slug": "update-an-old-cv",
+    "title": "Refresh an old CV without losing important details",
+    "category": "CV maintenance",
+    "description": "Recover information from an existing CV, check extracted text and rebuild an accurate, up-to-date resume.",
+    "cta": "Import your CV",
+    "href": "/builder/",
+    "sections": [
+      [
+        "Keep the original as your reference",
+        [
+          "Make a separate working copy before you update an old CV. The original can help you confirm dates, organization names and qualifications if extraction changes the reading order or misses a line. Gather any recent role details before you begin editing.",
+          "Decide what the updated CV is for. A general record can hold more history than a version for a particular application. Keep a fuller private reference, then choose the most relevant details for the document you will send."
+        ]
+      ],
+      [
+        "Import text and check its order",
+        [
+          "GlobalCV accepts text-based PDF, DOCX and TXT files up to 5 MB, with a limit of 15 pages for PDF imports. Importing recovers text to rebuild into a template; it does not reproduce the original layout. A scanned image of a CV needs text recognition before its words can be extracted.",
+          "After import, compare the extracted text with your original. Multi-column layouts, headers and unusual spacing can separate related lines. Check names, email addresses and dates first, then read each section from top to bottom."
+        ]
+      ],
+      [
+        "Separate roles and qualifications",
+        [
+          "A recovered section may contain several jobs or qualifications in one entry. Split them into separate items so each has its own title, organization, dates and description. Check that a project has not been mistaken for a job and that the dates belong to the right entry.",
+          "Use the reorder handle to put entries in the order you want. Within a section, a consistent approach makes the CV easier to follow. For example, you might place your most recent education first and your most relevant project first."
+        ]
+      ],
+      [
+        "Update claims as carefully as dates",
+        [
+          "Replace an old “Present” date if the role has ended. Remove skills you no longer want to claim and add recent work with descriptions you can explain in an interview. Check that a changed job title has not accidentally replaced the title of an earlier position.",
+          "Keep accomplishments specific. If an old entry says “Improved processes,” explain the process you changed and your contribution. Include measurable outcomes only when you have a reliable basis for them."
+        ]
+      ],
+      [
+        "Review and save the new version",
+        [
+          "Compare the final preview with your reference copy, then inspect the downloaded PDF for missing information and page breaks. You can create and download a resume without an account. Sign in if you want to save a private draft and return to it later. Give each application version a clear filename so you do not accidentally send an outdated copy."
+        ]
+      ]
+    ]
+  }
+]
