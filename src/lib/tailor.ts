@@ -39,8 +39,9 @@ export function validateSuggestions(value:unknown,r:Resume):TailorResult{
   const {field,entryIndex,after,reason,evidence}=change||{};
   if(!['headline','summary','skills','experience','projects'].includes(field)||!Number.isInteger(entryIndex)||typeof after!=='string'||!after.trim()||after.length>5000||typeof reason!=='string'||reason.length>700||!Array.isArray(evidence)||!evidence.length||evidence.length>32||evidence.some((x:unknown)=>typeof x!=='string'||!x.trim()||x.length>2000)){warnings.push(withheld);continue;}
   const isEntry=field==='experience'||field==='projects';
-  if(isEntry?entryIndex<0||entryIndex>=r[field].length:entryIndex!==-1){warnings.push(withheld);continue;}
-  const before=isEntry?r[field][entryIndex].details:r[field as 'headline'|'summary'|'skills'];
+  const entryField=field as 'experience'|'projects';
+  if(isEntry?entryIndex<0||entryIndex>=r[entryField].length:entryIndex!==-1){warnings.push(withheld);continue;}
+  const before=isEntry?r[entryField][entryIndex].details:r[field as 'headline'|'summary'|'skills'];
   const key=`${field}:${entryIndex}`;
   if(seen.has(key)){warnings.push(withheld);continue;}
   if(before===after)continue;
@@ -50,7 +51,7 @@ export function validateSuggestions(value:unknown,r:Resume):TailorResult{
   const normalize=(text:string)=>text.replace(/\s+/g,' ').trim();
   if(evidence.some((x:string)=>!normalize(evidenceSource).includes(normalize(x)))||numbers(after).some(n=>!numbers(isEntry?before:source).includes(n))||field==='skills'&&JSON.stringify(skillList(before))!==JSON.stringify(skillList(after))){warnings.push(withheld);continue;}
   seen.add(key);
-  suggestions.push({id:key,field,entryIndex,before,after,reason,evidence:evidence.slice(0,5),label:isEntry?`${field==='experience'?'Experience':'Project'}: ${r[field][entryIndex].title||entryIndex+1}`:field[0].toUpperCase()+field.slice(1)});
+  suggestions.push({id:key,field,entryIndex,before,after,reason,evidence:evidence.slice(0,5),label:isEntry?`${field==='experience'?'Experience':'Project'}: ${r[entryField][entryIndex].title||entryIndex+1}`:field[0].toUpperCase()+field.slice(1)});
  }
  return {suggestions,gaps:result.gaps.slice(0,8),warnings:[...new Set(warnings)]};
 }

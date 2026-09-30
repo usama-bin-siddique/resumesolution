@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "./.sites-runtime/api-compiled",
+    "rootDir": ".",
+    "declaration": false,
+    "sourceMap": false,
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "skipLibCheck": true
+  },
+  "include": [
+    "api/**/*.ts",
+    "server/**/*.ts",
+    "worker/**/*.ts",
+    "src/lib/resume.ts",
+    "src/lib/tailor.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".sites-runtime"
+  ]
+}
