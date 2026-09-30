@@ -49,3 +49,34 @@ The server reserves at most five AI attempts per account per UTC day, or per net
 Contact fields are excluded from the provider payload; professional sections can still contain personal information. CVs, job descriptions and suggestions are not stored server-side unless the user explicitly saves an approved draft. Usage records contain hashed identifiers and are cleaned up after three days on subsequent requests. AI suggestions are bounded, evidence-checked and restricted to selected text fields; human review is required because these checks cannot prove semantic accuracy.
 
 Validation covers concurrent quota reservation, account and guest scope, consent, provider errors, malformed replies, overlong evidence lists, selected-only changes, and preserving original data. Live provider diagnostics use fictional data and an in-memory quota database, separate from visitor usage.
+
+
+## Vercel + Turso deployment
+
+The root `api/` directory contains Vercel Node functions for the existing account,
+draft and tailoring endpoints. The Astro pages remain static in `dist/client`.
+The Cloudflare Worker deployment and local SQLite development flow remain supported.
+
+1. Connect a fresh Turso **libSQL** database to the Vercel project.
+2. Set Production environment variables `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`
+   and `GROQ_API_KEY`. Use the exact names; credentials must never use `PUBLIC_`.
+3. Set `PUBLIC_SITE_URL` to the production origin, e.g.
+   `https://resumesolution-rho.vercel.app` (no trailing slash).
+4. Deploy this source using Node 24, `npm run build`, and output `dist/client`.
+5. Visit `/api/tailor/usage`. It should return JSON with `remaining: 5` and
+   `configured: true`. `/api/me` should return `{"user":null}` when signed out.
+6. Test registration, save/open a draft, and tailoring after reviewing and consenting.
+
+Tables are created automatically on the first API request using the checked-in
+migration snapshot in `server/migrations.ts`. Transactions serialize cold starts
+and record completed migrations in `_globalcv_migrations`. Failures return JSON 503
+and retry initialization on the next request. Never manually create partial tables.
+When adding a Drizzle migration, update the snapshot too; a regression test verifies
+it matches the SQL files. No database credential is needed for the static build.
+
+The new database starts empty. Existing Cloudflare/local accounts and drafts are
+not automatically copied. To preserve those records, plan an explicit data migration.
+Use a separate Turso database for Preview deployments so tests do not alter production.
+Vercel provides the trusted visitor IP; spoofed Cloudflare headers are discarded.
+Daily limits and multi-statement auth changes use atomic Turso SQL operations.
+The API timeout is 60 seconds, with the Groq request bounded to 45 seconds.
